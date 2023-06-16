@@ -1,0 +1,36 @@
+name: TesteCD
+on:
+ workflow_dispatch:
+
+jobs:
+ build:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Run a one-line script
+    run: echo Hello, world!
+    
+ deploy-dev:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Run a one-line script
+    run: echo Hello, world!
+    
+ deploy-hmg:
+  runs-on: ubuntu-latest
+  environment:
+   name: hmg
+   url: 'iesb.br'
+  needs: deploy-dev
+  steps:
+  - name: Run a one-line script
+    run: echo deploy dev
+
+ deploy-prd:
+  runs-on: ubuntu-latest
+  environment:
+   name: prd
+   url: 'iesb.br'
+  needs: deploy-hmg
+  steps:
+  - name: Run a one-line script
+    run: echo deploy prd
